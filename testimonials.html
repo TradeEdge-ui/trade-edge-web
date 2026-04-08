@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wall of Proof | TradeEdge</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/scrollreveal"></script>
+
+    <style>
+        :root {
+            --bg: #030712;
+            --card: rgba(15, 23, 42, 0.7);
+            --neon: #38bdf8;
+            --neon-glow: rgba(56, 189, 248, 0.4);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: #1e293b;
+            --success: #10b981;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background: var(--bg); 
+            color: var(--text-main); 
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- BACKGROUND BLUR --- */
+        .neon-blur {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            background: var(--neon);
+            filter: blur(200px);
+            opacity: 0.1;
+            border-radius: 50%;
+            z-index: -1;
+            bottom: -200px;
+            left: -200px;
+        }
+
+        header {
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(3, 7, 18, 0.8);
+        }
+
+        .logo { font-weight: 800; font-size: 1.5rem; letter-spacing: -1px; }
+        .logo a { color: var(--text-main); text-decoration: none; }
+        .logo span { color: var(--neon); }
+
+        .nav-links { list-style: none; display: flex; gap: 2rem; }
+        .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; font-weight: 600; transition: 0.3s; }
+        .nav-links a:hover { color: var(--neon); }
+
+        /* --- TESTIMONIAL GRID --- */
+        .section-header { text-align: center; padding: 6rem 5% 2rem; }
+        .section-header h1 { font-size: 3.5rem; font-weight: 800; letter-spacing: -2px; margin-bottom: 1rem; }
+        .section-header span { color: var(--neon); }
+        .badge { background: var(--neon-glow); color: var(--neon); padding: 6px 16px; border-radius: 100px; font-size: 0.75rem; font-weight: 800; letter-spacing: 1px; display: inline-block; margin-bottom: 1rem; }
+
+        .testimonials-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+            gap: 2rem; 
+            padding: 2rem 5% 6rem; 
+            max-width: 1200px; 
+            margin: 0 auto; 
+        }
+
+        .story-card { 
+            background: var(--card); 
+            backdrop-filter: blur(10px);
+            padding: 2.5rem; 
+            border-radius: 24px; 
+            border: 1px solid var(--border); 
+            position: relative; 
+            transition: 0.3s;
+        }
+        .story-card:hover { transform: translateY(-10px); border-color: var(--neon); }
+
+        .rating { color: #fbbf24; margin-bottom: 1rem; font-size: 0.9rem; letter-spacing: 2px; }
+        .quote { font-size: 1.1rem; font-weight: 500; color: var(--text-main); margin-bottom: 2rem; line-height: 1.7; position: relative; }
+        
+        .student-info { display: flex; align-items: center; gap: 1rem; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 1.5rem; }
+        .student-img { width: 48px; height: 48px; border-radius: 12px; background: linear-gradient(45deg, #1e293b, #334155); display: flex; align-items: center; justify-content: center; font-weight: 800; color: var(--neon); border: 1px solid var(--border); }
+        
+        .status-badge { 
+            display: inline-block;
+            background: rgba(16, 185, 129, 0.1); 
+            color: var(--success); 
+            font-size: 0.7rem; 
+            padding: 4px 10px; 
+            border-radius: 6px; 
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 4px;
+        }
+
+        .cta-box { text-align: center; padding: 6rem 5%; background: linear-gradient(to bottom, transparent, rgba(56, 189, 248, 0.05)); }
+        .btn-neon { background: var(--neon); color: #000; padding: 18px 35px; border-radius: 12px; text-decoration: none; font-weight: 800; box-shadow: 0 10px 25px var(--neon-glow); transition: 0.3s; display: inline-block; }
+        .btn-neon:hover { transform: scale(1.05); box-shadow: 0 15px 35px var(--neon-glow); }
+
+    </style>
+</head>
+<body>
+
+    <div class="neon-blur"></div>
+
+    <header>
+        <div class="logo"><a href="index.html">TRADE<span>EDGE</span></a></div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="faq.html">Support</a></li>
+        </ul>
+    </header>
+
+    <div class="reveal">
+        <section class="section-header">
+            <div class="badge">VERIFIED PERFORMANCE</div>
+            <h1>Wall of <span>Success.</span></h1>
+            <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto;">Our institutional frameworks are currently being used by hundreds of traders to secure funding and scale their accounts.</p>
+        </section>
+
+        <div class="testimonials-grid">
+            <div class="story-card">
+                <div class="rating">★★★★★</div>
+                <p class="quote">"Before this blueprint, I was gambling on the Nasdaq. Ahmad's risk management framework changed everything. I just received my first 10% payout!"</p>
+                <div class="student-info">
+                    <div class="student-img">JT</div>
+                    <div>
+                        <p style="font-weight: 700; font-size: 1rem;">Jason T.</p>
+                        <span class="status-badge">✓ Funded $100k Account</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="story-card">
+                <div class="rating">★★★★★</div>
+                <p class="quote">"The lot sizing calculator alone is worth the price of the course. It takes all the emotion out of the execution phase. Finally consistent."</p>
+                <div class="student-info">
+                    <div class="student-img">SL</div>
+                    <div>
+                        <p style="font-weight: 700; font-size: 1rem;">Sarah L.</p>
+                        <span class="status-badge">✓ Top-Tier Payout</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="story-card">
+                <div class="rating">★★★★★</div>
+                <p class="quote">"Module 4 on Risk Management was a wake-up call. I finally stopped blowing accounts and started growing them consistently. High-level stuff."</p>
+                <div class="student-info">
+                    <div class="student-img">MK</div>
+                    <div>
+                        <p style="font-weight: 700; font-size: 1rem;">Michael K.</p>
+                        <span class="status-badge">✓ Elite Member</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="cta-box reveal">
+        <h2 style="font-size: 2.5rem; margin-bottom: 1.5rem;">Join the Ranks of Funded Traders.</h2>
+        <a href="index.html#enroll" class="btn-neon">SECURE YOUR ACCESS</a>
+    </section>
+
+    <script>
+        ScrollReveal().reveal('.reveal', { 
+            duration: 1000, 
+            distance: '30px', 
+            origin: 'bottom', 
+            opacity: 0, 
+            easing: 'cubic-bezier(0.5, 0, 0, 1)' 
+        });
+    </script>
+</body>
+</html>

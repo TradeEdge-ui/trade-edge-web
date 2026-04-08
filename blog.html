@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The TradeEdge Journal</title>
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --accent-green: #10b981;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: var(--bg-dark); color: var(--text-main); font-family: 'Inter', sans-serif; line-height: 1.6; }
+        a { text-decoration: none; transition: 0.3s; }
+
+        header { 
+            padding: 1.5rem 5%; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            border-bottom: 1px solid #1e293b;
+            background: rgba(15, 23, 42, 0.9);
+            position: sticky; top: 0; z-index: 100;
+        }
+        .logo a { font-size: 1.5rem; font-weight: 800; color: white; }
+        .logo span { color: var(--accent-green); }
+
+        /* Navigation Button */
+        .btn-back { color: var(--text-muted); cursor: pointer; display: none; font-weight: 600; }
+        .btn-back:hover { color: white; }
+
+        .container { padding: 4rem 5%; max-width: 1200px; margin: 0 auto; }
+
+        /* GRID VIEW */
+        #blog-grid-view .section-header { text-align: center; margin-bottom: 4rem; }
+        .badge { background: rgba(16, 185, 129, 0.1); color: var(--accent-green); padding: 0.5rem 1rem; border-radius: 50px; font-size: 0.8rem; font-weight: 700; display: inline-block; margin-bottom: 1rem; }
+        
+        .blog-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+            gap: 2rem; 
+        }
+        .blog-card { 
+            background: var(--bg-card); border: 1px solid #1e293b; 
+            border-radius: 12px; overflow: hidden; cursor: pointer;
+        }
+        .blog-card:hover { transform: translateY(-5px); border-color: var(--accent-green); }
+        .blog-img { height: 180px; background: #334155; display: flex; align-items: center; justify-content: center; color: var(--text-muted); }
+        .blog-body { padding: 1.5rem; }
+        .blog-tag { color: var(--accent-green); font-size: 0.75rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.5rem; display: block; }
+        .blog-body h3 { margin-bottom: 1rem; font-size: 1.4rem; }
+
+        /* POST VIEW (Hidden by default) */
+        #post-view { display: none; max-width: 800px; margin: 0 auto; animation: fadeIn 0.4s ease; }
+        .post-header { text-align: center; margin-bottom: 3rem; }
+        .post-header h1 { font-size: 2.5rem; margin: 1rem 0; }
+        .post-featured-img { width: 100%; height: 350px; background: #334155; border-radius: 12px; margin-bottom: 2rem; }
+        
+        blockquote { 
+            border-left: 4px solid var(--accent-green); 
+            padding: 1.5rem; margin: 2rem 0; 
+            background: rgba(16, 185, 129, 0.05); font-style: italic; 
+        }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo"><a href="#" onclick="showGrid()">Trade<span>Edge</span></a></div>
+        <div id="back-btn" class="btn-back" onclick="showGrid()">← Back to Journal</div>
+    </header>
+
+    <main class="container">
+        
+        <section id="blog-grid-view">
+            <div class="section-header">
+                <div class="badge">Market Analysis & Tips</div>
+                <h1>The TradeEdge Journal</h1>
+                <p>Weekly Nasdaq outlooks and prop firm strategies.</p>
+            </div>
+
+            <div class="blog-grid">
+                <article class="blog-card" onclick="openPost('nasdaq')">
+                    <div class="blog-img">📈 Nasdaq Analysis</div>
+                    <div class="blog-body">
+                        <span class="blog-tag">Market Outlook</span>
+                        <h3>Nasdaq 100: Key Levels for New York</h3>
+                        <p>Analyzing liquidity sweeps at the 18,200 level...</p>
+                    </div>
+                </article>
+
+                <article class="blog-card" onclick="openPost('psychology')">
+                    <div class="blog-img">🧠 Psychology</div>
+                    <div class="blog-body">
+                        <span class="blog-tag">Psychology</span>
+                        <h3>Overcoming Execution Anxiety</h3>
+                        <p>Why even the best strategies fail without mental clarity...</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section id="post-view">
+            <header class="post-header">
+                <span id="post-category" class="blog-tag"></span>
+                <h1 id="post-title"></h1>
+                <p id="post-meta" style="color: var(--text-muted);"></p>
+            </header>
+
+            <div class="post-featured-img"></div>
+
+            <div id="post-content" class="post-body">
+                </div>
+        </section>
+
+    </main>
+
+    <script>
+        // Post Data Storage
+        const posts = {
+            'nasdaq': {
+                tag: 'Market Outlook',
+                title: 'Nasdaq 100: Key Levels for New York',
+                meta: 'By Ahmad Riezkih • April 7, 2026',
+                content: `
+                    <p>Trading the Nasdaq requires understanding <strong>time and liquidity</strong>. Today we are looking at a specific fair value gap.</p>
+                    <blockquote>"Price doesn't move randomly; it moves from one area of liquidity to the next."</blockquote>
+                    <h2>Strategic Execution</h2>
+                    <p>We are looking for a sweep of the previous day's high before the London close.</p>
+                `
+            },
+            'psychology': {
+                tag: 'Psychology',
+                title: 'Overcoming Execution Anxiety',
+                meta: 'By Ahmad Riezkih • April 5, 2026',
+                content: `
+                    <p>Fear of pulling the trigger is the #1 killer of funded accounts. This usually stems from a lack of trust in your data.</p>
+                    <h2>The Solution</h2>
+                    <p>Lower your risk per trade until the "pain" of losing is neutralized.</p>
+                `
+            }
+        };
+
+        function openPost(postId) {
+            const post = posts[postId];
+            
+            // Fill post content
+            document.getElementById('post-category').innerText = post.tag;
+            document.getElementById('post-title').innerText = post.title;
+            document.getElementById('post-meta').innerText = post.meta;
+            document.getElementById('post-content').innerHTML = post.content;
+
+            // Switch Views
+            document.getElementById('blog-grid-view').style.display = 'none';
+            document.getElementById('post-view').style.display = 'block';
+            document.getElementById('back-btn').style.display = 'block';
+            window.scrollTo(0,0);
+        }
+
+        function showGrid() {
+            document.getElementById('blog-grid-view').style.display = 'block';
+            document.getElementById('post-view').style.display = 'none';
+            document.getElementById('back-btn').style.display = 'none';
+        }
+    </script>
+
+</body>
+</html>

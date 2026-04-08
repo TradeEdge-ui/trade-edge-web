@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Knowledge Base | TradeEdge</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/scrollreveal"></script>
+
+    <style>
+        :root {
+            --bg: #030712;
+            --card: rgba(15, 23, 42, 0.7);
+            --neon: #38bdf8;
+            --neon-glow: rgba(56, 189, 248, 0.4);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: #1e293b;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background: var(--bg); 
+            color: var(--text-main); 
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- BACKGROUND BLUR --- */
+        .neon-blur {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            background: var(--neon);
+            filter: blur(200px);
+            opacity: 0.1;
+            border-radius: 50%;
+            z-index: -1;
+            top: -200px;
+            right: -200px;
+        }
+
+        header {
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(3, 7, 18, 0.8);
+        }
+
+        .logo { font-weight: 800; font-size: 1.5rem; letter-spacing: -1px; }
+        .logo a { color: var(--text-main); text-decoration: none; }
+        .logo span { color: var(--neon); }
+
+        .btn-outline {
+            padding: 10px 20px;
+            border: 1px solid var(--neon);
+            border-radius: 10px;
+            color: var(--neon);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.85rem;
+            transition: 0.3s;
+        }
+        .btn-outline:hover { background: var(--neon); color: #000; box-shadow: 0 0 20px var(--neon-glow); }
+
+        .faq-container { 
+            padding: 6rem 5%; 
+            max-width: 900px; 
+            margin: 0 auto; 
+        }
+
+        .section-header { text-align: center; margin-bottom: 4rem; }
+        .section-header h2 { font-size: 3rem; font-weight: 800; margin-bottom: 1rem; letter-spacing: -2px; }
+        .section-header p { color: var(--text-muted); font-size: 1.1rem; }
+
+        .faq-item { 
+            background: var(--card); 
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border); 
+            margin-bottom: 1.2rem; 
+            border-radius: 16px; 
+            overflow: hidden; 
+            transition: 0.3s;
+        }
+        .faq-item:hover { border-color: var(--neon); }
+
+        summary { 
+            padding: 1.8rem; 
+            cursor: pointer; 
+            font-weight: 700; 
+            font-size: 1.1rem;
+            list-style: none; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+        }
+        summary::-webkit-details-marker { display: none; }
+        
+        summary::after { 
+            content: '→'; 
+            color: var(--neon); 
+            font-size: 1.2rem; 
+            transition: 0.3s;
+        }
+        details[open] summary::after { transform: rotate(90deg); }
+
+        .faq-content { 
+            padding: 0 1.8rem 1.8rem; 
+            color: var(--text-muted); 
+            font-size: 1rem;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding-top: 1.5rem;
+        }
+
+        footer {
+            padding: 4rem 5%;
+            text-align: center;
+            border-top: 1px solid var(--border);
+            margin-top: 4rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="neon-blur"></div>
+
+    <header>
+        <div class="logo"><a href="index.html">TRADE<span>EDGE</span></a></div>
+        <a href="index.html#enroll" class="btn-outline">ENROLL NOW</a>
+    </header>
+
+    <div class="faq-container reveal">
+        <div class="section-header">
+            <h2>Common Questions</h2>
+            <p>Everything you need to know about the Elite Command Center and the Academy.</p>
+        </div>
+
+        <details class="faq-item">
+            <summary>Is this course suitable for complete beginners?</summary>
+            <div class="faq-content">
+                Absolutely. While we transition into advanced institutional frameworks quickly, the initial modules are built to establish a professional foundation for those who have never interacted with the markets before.
+            </div>
+        </details>
+
+        <details class="faq-item">
+            <summary>Do I need high starting capital?</summary>
+            <div class="faq-content">
+                No. Our curriculum is specifically optimized for <strong>Proprietary Trading (Prop Firms)</strong>. We teach you how to pass evaluations to manage capital ranging from $50,000 to $200,000 for a minimal entry fee.
+            </div>
+        </details>
+
+        <details class="faq-item">
+            <summary>Which market assets are covered?</summary>
+            <div class="faq-content">
+                Our primary focus is the <strong>Nasdaq (NAS100)</strong> and <strong>Gold (XAUUSD)</strong>. These assets provide the high volatility and clean technical delivery required for our specific scalping and day-trading models.
+            </div>
+        </details>
+
+        <details class="faq-item">
+            <summary>How do I access the Private Discord?</summary>
+            <div class="faq-content">
+                Upon completing your enrollment, a secure invitation link will be generated in your Elite Terminal dashboard under the "Support" or "Academy" tab.
+            </div>
+        </details>
+
+        <details class="faq-item">
+            <summary>Is there a refund policy?</summary>
+            <div class="faq-content">
+                Yes. We offer a 14-day satisfaction guarantee. If the frameworks provided do not add value to your trading process, contact support for a full refund—no questions asked.
+            </div>
+        </details>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 TradeEdge Elite Terminal. Built for Institutional Performance.</p>
+    </footer>
+
+    <script>
+        ScrollReveal().reveal('.reveal', { 
+            duration: 1000, 
+            distance: '30px', 
+            origin: 'bottom', 
+            opacity: 0, 
+            easing: 'cubic-bezier(0.5, 0, 0, 1)' 
+        });
+    </script>
+</body>
+</html>

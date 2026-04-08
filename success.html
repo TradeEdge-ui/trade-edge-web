@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to the Team | TradeEdge</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/scrollreveal"></script>
+
+    <style>
+        :root {
+            --bg: #030712;
+            --card: rgba(15, 23, 42, 0.7);
+            --neon: #38bdf8;
+            --neon-glow: rgba(56, 189, 248, 0.4);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: #1e293b;
+            --success: #10b981;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background: var(--bg); 
+            color: var(--text-main); 
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        /* --- BACKGROUND BLUR --- */
+        .neon-blur {
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            background: var(--neon);
+            filter: blur(180px);
+            opacity: 0.12;
+            border-radius: 50%;
+            z-index: -1;
+        }
+
+        /* --- SUCCESS CARD --- */
+        .success-card {
+            background: var(--card);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            padding: 4rem 3rem;
+            border-radius: 40px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+        }
+
+        .check-icon {
+            width: 100px;
+            height: 100px;
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+            border: 2px solid var(--success);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            margin: 0 auto 2.5rem;
+            box-shadow: 0 0 30px rgba(16, 185, 129, 0.2);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 20px rgba(16, 185, 129, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+
+        h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem; letter-spacing: -1px; }
+        p { color: var(--text-muted); line-height: 1.6; margin-bottom: 3rem; }
+
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .btn-neon {
+            background: var(--neon);
+            color: #000;
+            padding: 14px 28px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: 0.3s;
+            box-shadow: 0 8px 20px var(--neon-glow);
+        }
+
+        .btn-outline {
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            padding: 14px 28px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+
+        .btn-neon:hover { transform: translateY(-3px); box-shadow: 0 12px 30px var(--neon-glow); }
+        .btn-outline:hover { background: rgba(255,255,255,0.05); border-color: var(--text-muted); }
+
+        .support-text {
+            margin-top: 3rem;
+            font-size: 0.85rem;
+            color: #475569;
+        }
+
+        .support-text a { color: var(--neon); text-decoration: none; font-weight: 600; }
+    </style>
+</head>
+<body>
+
+    <div class="neon-blur"></div>
+
+    <main class="success-card reveal">
+        <div class="check-icon">✓</div>
+        <h1>You're In!</h1>
+        <p>Your payment was successful and your terminal access is now live. A receipt has been sent to your email. It's time to master the markets.</p>
+        
+        <div class="btn-group">
+            <a href="dashboard.html" class="btn-neon">GO TO DASHBOARD</a>
+            <a href="index.html" class="btn-outline">HOME</a>
+        </div>
+
+        <div class="support-text">
+            Need assistance? <a href="contact.html">Contact Support</a>
+        </div>
+    </main>
+
+    <script>
+        ScrollReveal().reveal('.reveal', { 
+            duration: 1200, 
+            distance: '50px', 
+            origin: 'bottom', 
+            opacity: 0, 
+            easing: 'cubic-bezier(0.5, 0, 0, 1)' 
+        });
+    </script>
+
+</body>
+</html>

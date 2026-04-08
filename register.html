@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account | TradeEdge</title>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.7/dist/umd/supabase.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/scrollreveal"></script>
+
+    <style>
+        :root {
+            --bg: #030712;
+            --card: rgba(15, 23, 42, 0.7);
+            --neon: #38bdf8;
+            --neon-glow: rgba(56, 189, 248, 0.4);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: #1e293b;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background: var(--bg); 
+            color: var(--text-main); 
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* --- NEON BACKGROUND EFFECTS --- */
+        .neon-blur {
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            background: var(--neon);
+            filter: blur(180px);
+            opacity: 0.12;
+            border-radius: 50%;
+            z-index: -1;
+            pointer-events: none;
+        }
+        .blur-top { top: -200px; left: -100px; }
+        .blur-bottom { bottom: -200px; right: -100px; }
+
+        /* --- HEADER --- */
+        header {
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(3, 7, 18, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            z-index: 10;
+        }
+
+        .logo { font-weight: 800; font-size: 1.5rem; letter-spacing: -1px; text-decoration: none; color: white; }
+        .logo span { color: var(--neon); text-shadow: 0 0 15px var(--neon-glow); }
+
+        /* --- AUTH LAYOUT --- */
+        .auth-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4rem 2rem;
+            background: radial-gradient(circle at center, #0f172a 0%, #030712 100%);
+        }
+
+        .auth-card {
+            background: var(--card);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            padding: 3.5rem;
+            border-radius: 32px;
+            width: 100%;
+            max-width: 550px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+
+        .auth-card h2 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            letter-spacing: -1px;
+            text-align: center;
+        }
+
+        .auth-card p.subtitle {
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            font-size: 0.95rem;
+            text-align: center;
+        }
+
+        /* --- FORM STYLING --- */
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+        .form-group { text-align: left; margin-bottom: 1.5rem; }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.6rem;
+            color: var(--text-main);
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 1rem 1.2rem;
+            background: rgba(3, 7, 18, 0.5);
+            border: 1px solid var(--border);
+            color: white;
+            border-radius: 14px;
+            font-size: 1rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--neon);
+            background: rgba(56, 189, 248, 0.05);
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.15);
+        }
+
+        .btn-neon {
+            width: 100%;
+            background: var(--neon);
+            color: #000;
+            padding: 16px;
+            border-radius: 14px;
+            border: none;
+            font-weight: 800;
+            font-size: 1rem;
+            cursor: pointer;
+            box-shadow: 0 8px 25px var(--neon-glow);
+            transition: 0.3s;
+            margin-top: 1rem;
+        }
+
+        .btn-neon:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 35px var(--neon-glow);
+        }
+
+        .btn-neon:disabled {
+            background: var(--text-muted);
+            box-shadow: none;
+            cursor: not-allowed;
+        }
+
+        .footer-link {
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            text-align: center;
+        }
+
+        .footer-link a {
+            color: var(--neon);
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        @media (max-width: 600px) {
+            .form-row { grid-template-columns: 1fr; gap: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="neon-blur blur-top"></div>
+    <div class="neon-blur blur-bottom"></div>
+
+    <header>
+        <a href="index.html" class="logo">Trade<span>Edge</span></a>
+        <p style="font-size: 0.9rem; color: var(--text-muted);">Already a member? <a href="login.html" style="color: var(--neon); text-decoration: none; font-weight: 700;">Login</a></p>
+    </header>
+
+    <div class="auth-container">
+        <div class="auth-card">
+            <h2>Initialize Account</h2>
+            <p class="subtitle">Secure your lifetime access to the elite terminal.</p>
+
+            <form onsubmit="handleSignup(event)">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>First Name</label>
+                        <input type="text" id="firstName" placeholder="Ahmad" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Last Name</label>
+                        <input type="text" id="lastName" placeholder="Riezkih" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>EMAIL ADDRESS</label>
+                    <input type="email" id="email" placeholder="trader@example.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label>CREATE PASSWORD</label>
+                    <input type="password" id="password" placeholder="••••••••" required>
+                </div>
+
+                <div class="form-group">
+                    <label>CONFIRM PASSWORD</label>
+                    <input type="password" id="confirmPassword" placeholder="••••••••" required>
+                </div>
+
+                <p style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 2rem; text-align: center;">
+                    By initializing, you agree to our <a href="legal.html" style="color: var(--neon); text-decoration: none;">Terms of Service</a> & Risk Disclosure.
+                </p>
+
+                <button type="submit" id="submit-btn" class="btn-neon">CREATE ACCOUNT</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // --- SUPABASE CONFIGURATION ---
+        const SUPABASE_URL = 'https://mdefpesnbawqlzfygaqt.supabase.co';
+        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1kZWZwZXNuYmF3cWx6ZnlnYXF0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU1NzQ0NzAsImV4cCI6MjA5MTE1MDQ3MH0.aORQwc6xJXeVmwTsa2Ql_bpCQTThwFfEYYjZKNTlNAg';
+        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        async function handleSignup(event) {
+            event.preventDefault(); 
+            
+            const submitBtn = document.getElementById('submit-btn');
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            // Password Match Validation
+            if (password !== confirmPassword) {
+                alert("Passwords do not match. Please try again.");
+                return;
+            }
+
+            submitBtn.innerText = "PROCESSING...";
+            submitBtn.disabled = true;
+
+            const { data, error } = await supabaseClient.auth.signUp({
+                email: email,
+                password: password,
+            });
+
+            if (error) {
+                alert("Error: " + error.message);
+                submitBtn.innerText = "CREATE ACCOUNT";
+                submitBtn.disabled = false;
+            } else {
+                alert("Success! Access link sent to your email.");
+                window.location.href = "login.html";
+            }
+        }
+
+        // --- ENTRANCE ANIMATION ---
+        ScrollReveal().reveal('.auth-card', { 
+            duration: 1200, 
+            distance: '50px', 
+            origin: 'bottom', 
+            opacity: 0, 
+            easing: 'cubic-bezier(0.5, 0, 0, 1)' 
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legal & Risk Disclosure | TradeEdge</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/scrollreveal"></script>
+
+    <style>
+        :root {
+            --bg: #030712;
+            --card: rgba(15, 23, 42, 0.6);
+            --neon: #38bdf8;
+            --danger: #ef4444;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: #1e293b;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background: var(--bg); 
+            color: var(--text-main); 
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        /* --- BACKGROUND EFFECTS --- */
+        .neon-blur {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            background: var(--neon);
+            filter: blur(200px);
+            opacity: 0.08;
+            border-radius: 50%;
+            z-index: -1;
+            pointer-events: none;
+        }
+        .blur-top { top: -200px; right: -100px; }
+
+        /* --- HEADER --- */
+        header {
+            padding: 1.25rem 5%;
+            background: rgba(3, 7, 18, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo { font-weight: 800; font-size: 1.5rem; letter-spacing: -1px; text-decoration: none; color: white; }
+        .logo span { color: var(--neon); }
+
+        /* --- CONTENT LAYOUT --- */
+        .legal-container {
+            max-width: 900px;
+            margin: 4rem auto;
+            padding: 0 5%;
+        }
+
+        .legal-card {
+            background: var(--card);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            padding: 4rem;
+            border-radius: 32px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+        }
+
+        /* --- RISK BOX --- */
+        .risk-box {
+            border: 1px solid var(--danger);
+            padding: 2.5rem;
+            border-radius: 20px;
+            background: rgba(239, 68, 68, 0.05);
+            margin-bottom: 3rem;
+            box-shadow: 0 0 30px rgba(239, 68, 68, 0.1);
+        }
+
+        .risk-box h2 {
+            color: var(--danger);
+            margin-top: 0;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+
+        /* --- TYPOGRAPHY --- */
+        h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 2rem; letter-spacing: -1px; }
+        h2 { font-size: 1.5rem; font-weight: 700; margin-top: 3rem; margin-bottom: 1rem; color: var(--neon); }
+        p { color: var(--text-muted); margin-bottom: 1.5rem; }
+
+        footer {
+            text-align: center;
+            padding: 4rem 0;
+            border-top: 1px solid var(--border);
+            margin-top: 4rem;
+        }
+
+        @media (max-width: 768px) {
+            .legal-card { padding: 2rem; }
+            h1 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="neon-blur blur-top"></div>
+
+    <header>
+        <a href="index.html" class="logo">Trade<span>Edge</span></a>
+    </header>
+
+    <main class="legal-container">
+        <div class="legal-card reveal">
+            
+            <div class="risk-box">
+                <h2>High Risk Warning</h2>
+                <p style="color: var(--text-main);">Trading financial instruments, including indices like the Nasdaq and Forex pairs, carries a significant level of risk. The high degree of leverage offered in modern trading can lead to large losses as well as large gains. Before deciding to trade, you should carefully consider your objectives, level of experience, and risk appetite.</p>
+            </div>
+
+            <h1>Terms of Service</h1>
+            <p>Welcome to TradeEdge Education. By accessing our course materials, community, or digital tools, you agree to be bound by the following terms and conditions. If you do not agree with any part of these terms, you are prohibited from using our services.</p>
+
+            <h2>Educational Purpose Only</h2>
+            <p>All content provided within TradeEdge, including trade ideas, analysis, and educational modules, is for <strong>illustrative and educational purposes only</strong>. Ahmad Riezkih and the TradeEdge team are not registered financial advisors. We do not provide personalized investment advice or trade execution services.</p>
+
+            <h2>No Guarantee of Results</h2>
+            <p>While the frameworks provided are designed to improve market understanding and risk management, trading outcomes are never guaranteed. Past performance is not indicative of future results. You are solely responsible for any capital you risk in the markets.</p>
+
+            <h2>Refund Policy</h2>
+            <p>We believe in the value of our program. We offer a <strong>14-day money-back guarantee</strong>. To be eligible for a refund, you must have consumed less than 20% of the course content. This ensures the integrity of our intellectual property while providing a safety net for our students.</p>
+
+            <h2>Proprietary Rights</h2>
+            <p>The strategies, videos, and documents provided are the intellectual property of TradeEdge Education. Unauthorized distribution, sharing of login credentials, or reselling of this content will result in immediate termination of access without refund and potential legal action.</p>
+        </div>
+    </main>
+
+    <footer>
+        <p style="color: var(--text-muted); font-size: 0.85rem;">&copy; 2026 TradeEdge Academy. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Smooth Entrance Animation
+        ScrollReveal().reveal('.reveal', { 
+            duration: 1200, 
+            distance: '40px', 
+            origin: 'bottom', 
+            opacity: 0, 
+            easing: 'cubic-bezier(0.5, 0, 0, 1)' 
+        });
+    </script>
+
+</body>
+</html>

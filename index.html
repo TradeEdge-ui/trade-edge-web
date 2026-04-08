@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TradeEdge | Elite Trading Academy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <style>
+        :root {
+            --bg: #030712;
+            --card: #0f172a;
+            --neon: #38bdf8; /* High-end Cyan Neon */
+            --neon-glow: rgba(56, 189, 248, 0.4);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: #1e293b;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+        
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background: var(--bg); 
+            color: var(--text-main); 
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- BACKGROUND LIGHTNING EFFECTS --- */
+        .neon-blur {
+            position: fixed;
+            width: 400px;
+            height: 400px;
+            background: var(--neon);
+            filter: blur(150px);
+            opacity: 0.15;
+            border-radius: 50%;
+            z-index: -1;
+            pointer-events: none;
+        }
+        .blur-1 { top: -100px; right: -100px; }
+        .blur-2 { bottom: -100px; left: -100px; }
+
+        /* --- HEADER --- */
+        header {
+            padding: 1.25rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            background: rgba(3, 7, 18, 0.8);
+            backdrop-filter: blur(16px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo { font-weight: 800; font-size: 1.5rem; letter-spacing: -1px; }
+        .logo span { color: var(--neon); text-shadow: 0 0 15px var(--neon-glow); }
+
+        .nav-links { display: flex; list-style: none; gap: 2rem; }
+        .nav-links a { text-decoration: none; color: var(--text-muted); font-size: 0.9rem; font-weight: 500; transition: 0.3s; }
+        .nav-links a:hover { color: var(--neon); }
+
+        /* --- HERO SECTION --- */
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 5%;
+            padding-top: 80px;
+            background: radial-gradient(circle at center, #0f172a 0%, #030712 100%);
+        }
+
+        .badge {
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--neon);
+            padding: 10px 20px;
+            border-radius: 100px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            border: 1px solid var(--neon-glow);
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        h1 { font-size: clamp(2.5rem, 8vw, 5rem); line-height: 1.1; font-weight: 800; margin-bottom: 1.5rem; letter-spacing: -2px; }
+        h1 span { color: var(--neon); text-shadow: 0 0 20px var(--neon-glow); }
+        
+        #hero p { color: var(--text-muted); max-width: 650px; margin-bottom: 3rem; font-size: 1.1rem; }
+
+        .btn-neon {
+            background: var(--neon);
+            color: #000;
+            padding: 18px 40px;
+            border-radius: 14px;
+            text-decoration: none;
+            font-weight: 700;
+            box-shadow: 0 10px 30px var(--neon-glow);
+            transition: 0.3s;
+        }
+        .btn-neon:hover { transform: translateY(-3px); box-shadow: 0 15px 40px var(--neon-glow); }
+
+        /* --- CURRICULUM GRID --- */
+        #curriculum { padding: 120px 5%; }
+        .section-title { text-align: center; margin-bottom: 4rem; }
+        .section-title h2 { font-size: 3rem; margin-bottom: 1rem; }
+
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .module-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            padding: 2.5rem;
+            border-radius: 24px;
+            transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .module-card:hover { 
+            border-color: var(--neon); 
+            transform: translateY(-8px);
+            background: #111a2e;
+        }
+
+        .mod-num { color: var(--neon); font-weight: 800; font-size: 0.75rem; letter-spacing: 1px; margin-bottom: 1rem; display: block; }
+        .module-card h3 { margin-bottom: 1rem; font-size: 1.3rem; }
+        .module-card ul { list-style: none; margin-top: 1.5rem; }
+        .module-card li { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 8px; display: flex; align-items: center; }
+        .module-card li::before { content: '→'; color: var(--neon); margin-right: 10px; }
+
+        /* --- PRICING --- */
+        #enroll { padding: 120px 5%; text-align: center; }
+        .pricing-card {
+            background: linear-gradient(145deg, #0f172a, #030712);
+            border: 1px solid var(--neon);
+            padding: 4rem 2rem;
+            border-radius: 40px;
+            max-width: 550px;
+            margin: 0 auto;
+            box-shadow: 0 0 50px rgba(56, 189, 248, 0.1);
+        }
+
+        .price { font-size: 5rem; font-weight: 800; margin: 1.5rem 0; color: #fff; }
+        .price span { font-size: 1.2rem; color: var(--text-muted); font-weight: 400; }
+        .currency { font-size: 2rem; color: var(--neon); vertical-align: top; margin-top: 15px; display: inline-block; }
+
+        /* --- MOBILE --- */
+        @media (max-width: 900px) {
+            .nav-links { display: none; }
+            h1 { font-size: 3rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="neon-blur blur-1"></div>
+    <div class="neon-blur blur-2"></div>
+
+    <header>
+        <div class="logo">Trade<span>Edge</span></div>
+        <ul class="nav-links">
+            <li><a href="#curriculum">Curriculum</a></li>
+            <li><a href="login.html">Login</a></li>
+            <li><a href="contact.html">Support</a></li>
+            <li><a href="faq.html">FaQ</a></li>
+            <li><a href="testimonials.html">Testimonials</a></li>
+        </ul>
+        <a href="checkout.html" class="btn-neon" style="padding: 10px 20px; font-size: 0.8rem;">JOIN NOW</a>
+    </header>
+
+    <section id="hero">
+        <div class="reveal-hero">
+            <div class="badge">Registration Open 2026</div>
+            <h1>Trade with Edge. <br><span>Protect Wealth.</span></h1>
+            <p>Master the exact risk management and technical frameworks required to dominate prop firm challenges and institutional markets.</p>
+            <a href="#enroll" class="btn-neon">LIFETIME ACCESS — $39</a>
+        </div>
+    </section>
+
+    <section id="curriculum">
+        <div class="section-title reveal">
+            <h2>The Blueprint</h2>
+            <p style="color: var(--text-muted)">8 Modules. Pure Execution. Zero Fluff.</p>
+        </div>
+        
+        <div class="course-grid">
+            <div class="module-card reveal">
+                <span class="mod-num">MODULE 01</span>
+                <h3>Market Foundations</h3>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">Building the psychological and technical base.</p>
+                <ul>
+                    <li>Market Structure Basics</li>
+                    <li>Trading Terminology</li>
+                </ul>
+            </div>
+
+            <div class="module-card reveal">
+                <span class="mod-num">MODULE 02</span>
+                <h3>Orders & Platforms</h3>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">Mastering professional execution tools.</p>
+                <ul>
+                    <li>Order Types (Limit/Stop)</li>
+                    <li>Platform Navigation</li>
+                </ul>
+            </div>
+
+            <div class="module-card reveal">
+                <span class="mod-num">MODULE 03</span>
+                <h3>Technical Analysis</h3>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">Reading price action with high precision.</p>
+                <ul>
+                    <li>Support & Resistance</li>
+                    <li>Trend Confluence</li>
+                </ul>
+            </div>
+
+            <div class="module-card reveal">
+                <span class="mod-num">MODULE 04</span>
+                <h3>Risk Management</h3>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">The only skill that keeps you in the game.</p>
+                <ul>
+                    <li>Lot Size Calculation</li>
+                    <li>Drawdown Control</li>
+                </ul>
+            </div>
+
+            <div class="module-card reveal">
+                <span class="mod-num">MODULE 05</span>
+                <h3>Trade Management</h3>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">Optimizing your exits for max profit.</p>
+                <ul>
+                    <li>Entry Models</li>
+                    <li>Risk-to-Reward Ratios</li>
+                </ul>
+            </div>
+
+            <div class="module-card reveal">
+                <span class="mod-num">MODULE 06</span>
+                <h3>Strategy Refinement</h3>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">Backtesting and building your edge.</p>
+                <ul>
+                    <li>System Validation</li>
+                    <li>Forward Testing</li>
+                </ul>
+            </div>
+
+            <div class="module-card reveal">
+                <span class="mod-num">MODULE 07</span>
+                <h3>Advanced Concepts</h3>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">Institutional liquidity and smart money.</p>
+                <ul>
+                    <li>Liquidity Voids</li>
+                    <li>Market Manipulation</li>
+                </ul>
+            </div>
+
+            <div class="module-card reveal">
+                <span class="mod-num">MODULE 08</span>
+                <h3>Trader Workflow</h3>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">Turning trading into a repeatable business.</p>
+                <ul>
+                    <li>Daily Routine</li>
+                    <li>Performance Journaling</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="enroll">
+        <div class="pricing-card reveal">
+            <div class="badge">Limited Time Offer</div>
+            <h3>Elite Lifetime Access</h3>
+            <div class="price">
+                <span class="currency">$</span>39<span>/ lifetime</span>
+            </div>
+            <p style="color: var(--text-muted); margin-bottom: 2.5rem;">One payment. Lifetime updates. Private community access.</p>
+            <a href="checkout.html" class="btn-neon" style="display: block;">ENROLL FOR $39</a>
+            <div style="margin-top: 25px; font-size: 0.8rem; color: var(--text-muted);">
+                🔒 Encrypted Checkout • Stripe Verified
+            </div>
+        </div>
+    </section>
+
+    <footer style="padding: 50px 5%; text-align: center; border-top: 1px solid var(--border);">
+        <p style="color: var(--text-muted); font-size: 0.8rem;">&copy; 2026 TradeEdge Academy. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Smooth Scroll Animations
+        ScrollReveal().reveal('.reveal-hero', { 
+            duration: 1200, 
+            distance: '60px', 
+            origin: 'bottom', 
+            opacity: 0, 
+            easing: 'cubic-bezier(0.5, 0, 0, 1)' 
+        });
+
+        ScrollReveal().reveal('.reveal', { 
+            duration: 1000, 
+            distance: '40px', 
+            origin: 'bottom', 
+            interval: 100,
+            opacity: 0,
+            easing: 'ease-out'
+        });
+    </script>
+</body>
+</html>

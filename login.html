@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Login | TradeEdge</title>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.7/dist/umd/supabase.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/scrollreveal"></script>
+
+    <style>
+        :root {
+            --bg: #030712;
+            --card: rgba(15, 23, 42, 0.7);
+            --neon: #38bdf8;
+            --neon-glow: rgba(56, 189, 248, 0.4);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: #1e293b;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background: var(--bg); 
+            color: var(--text-main); 
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        /* --- NEON BACKGROUND EFFECTS --- */
+        .neon-blur {
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            background: var(--neon);
+            filter: blur(180px);
+            opacity: 0.12;
+            border-radius: 50%;
+            z-index: -1;
+        }
+        .blur-top { top: -200px; right: -100px; }
+        .blur-bottom { bottom: -200px; left: -100px; }
+
+        /* --- HEADER --- */
+        header {
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(3, 7, 18, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo { font-weight: 800; font-size: 1.5rem; letter-spacing: -1px; text-decoration: none; color: white; }
+        .logo span { color: var(--neon); text-shadow: 0 0 15px var(--neon-glow); }
+
+        /* --- AUTH LAYOUT --- */
+        .auth-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            background: radial-gradient(circle at center, #0f172a 0%, #030712 100%);
+        }
+
+        .auth-card {
+            background: var(--card);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            padding: 3.5rem;
+            border-radius: 32px;
+            width: 100%;
+            max-width: 480px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            text-align: center;
+        }
+
+        .auth-card h2 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            letter-spacing: -1px;
+        }
+
+        .auth-card p {
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            font-size: 0.95rem;
+        }
+
+        /* --- FORM STYLING --- */
+        .form-group {
+            text-align: left;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.6rem;
+            color: var(--text-main);
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 1rem 1.2rem;
+            background: rgba(3, 7, 18, 0.5);
+            border: 1px solid var(--border);
+            color: white;
+            border-radius: 14px;
+            font-size: 1rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--neon);
+            background: rgba(56, 189, 248, 0.05);
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.15);
+        }
+
+        .forgot-pass {
+            display: block;
+            text-align: right;
+            font-size: 0.85rem;
+            color: var(--neon);
+            text-decoration: none;
+            margin-bottom: 2rem;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .forgot-pass:hover { opacity: 0.8; }
+
+        .btn-neon {
+            width: 100%;
+            background: var(--neon);
+            color: #000;
+            padding: 16px;
+            border-radius: 14px;
+            border: none;
+            font-weight: 800;
+            font-size: 1rem;
+            cursor: pointer;
+            box-shadow: 0 8px 25px var(--neon-glow);
+            transition: 0.3s;
+        }
+
+        .btn-neon:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 35px var(--neon-glow);
+        }
+
+        .btn-neon:disabled {
+            background: var(--text-muted);
+            box-shadow: none;
+            cursor: not-allowed;
+        }
+
+        .footer-link {
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .footer-link a {
+            color: var(--neon);
+            text-decoration: none;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="neon-blur blur-top"></div>
+    <div class="neon-blur blur-bottom"></div>
+
+    <header>
+        <a href="index.html" class="logo">Trade<span>Edge</span></a>
+        <a href="index.html" style="color: var(--text-muted); text-decoration: none; font-size: 0.9rem; font-weight: 600;">← Exit Vault</a>
+    </header>
+
+    <div class="auth-container">
+        <div class="auth-card">
+            <h2>Welcome Back</h2>
+            <p>Enter your credentials to access the terminal.</p>
+
+            <form onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label>EMAIL ADDRESS</label>
+                    <input type="email" id="email" placeholder="name@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label>PASSWORD</label>
+                    <input type="password" id="password" placeholder="••••••••" required>
+                </div>
+
+                <a href="forgot-password.html" class="forgot-pass">Recover Password?</a>
+
+                <button type="submit" id="submit-btn" class="btn-neon">ACCESS DASHBOARD</button>
+
+                <div class="footer-link">
+                    New trader? <a href="register.html">Initialize Account</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // --- SUPABASE LOGIC (Preserved) ---
+        const SUPABASE_URL = 'https://mdefpesnbawqlzfygaqt.supabase.co';
+        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1kZWZwZXNuYmF3cWx6ZnlnYXF0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU1NzQ0NzAsImV4cCI6MjA5MTE1MDQ3MH0.aORQwc6xJXeVmwTsa2Ql_bpCQTThwFfEYYjZKNTlNAg'; 
+        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        async function handleLogin(event) {
+            event.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const submitBtn = document.getElementById('submit-btn');
+
+            submitBtn.innerText = "AUTHENTICATING...";
+            submitBtn.disabled = true;
+
+            const { data, error } = await supabaseClient.auth.signInWithPassword({
+                email: email,
+                password: password,
+            });
+
+            if (error) {
+                alert("Login Failed: " + error.message);
+                submitBtn.innerText = "ACCESS DASHBOARD";
+                submitBtn.disabled = false;
+            } else {
+                window.location.href = "dashboard.html";
+            }
+        }
+
+        // --- ANIMATION ---
+        ScrollReveal().reveal('.auth-card', { 
+            duration: 1200, 
+            distance: '50px', 
+            origin: 'bottom', 
+            opacity: 0, 
+            easing: 'cubic-bezier(0.5, 0, 0, 1)' 
+        });
+    </script>
+
+</body>
+</html>
